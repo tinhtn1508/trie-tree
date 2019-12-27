@@ -1,9 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 
 class Parser
 {
-	Parser() = default;
-	~Parser() = default;
+public:
+	Parser(std::string path);
+	~Parser();
+private:
+	std::string path;
+	std::ifstream file;
 };
