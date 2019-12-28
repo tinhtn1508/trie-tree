@@ -23,16 +23,22 @@ int main() {
         }
         root->insert(key);
     }
-
-    std::string text = "With dramatic peaks and pristine lakes, Yellowstone National Park is an outdoor \
-                        enthusiast's paradise. Live Oak pools swirl Livingston hot springs; verdant forests \
-                        weave past Fort Thomas meadows; and volatile geysers Glendale streams of steaming water \
-                        toward the Elmendorf Air Force Base";
-
+    std::string rawText;
+    std::string text;
+    auto fileText = std::ifstream(TEXT_PATH);
+    while(fileText.good()) {
+        std::getline(fileText, rawText);
+        text += rawText;
+    }
     std::sregex_token_iterator iter(text.begin(), text.end(), rgx, -1);
     std::sregex_token_iterator end;
-    std::string foundKey;
+    std::string foundKey = "";
     std::string printKey;
+    std::string cacheKey;
+    std::sregex_token_iterator back;
+    bool flag = true;
+    std::cout << "\nText: \n" << text << std::endl;
+    std::cout << "\nKeys found: \n";
     while (iter != end) {
         foundKey += *iter;
         auto result = root->isWord(foundKey);
@@ -40,14 +46,27 @@ int main() {
             printKey += *iter;
             std::cout << printKey << std::endl;
             printKey = "";
+            foundKey = "";
+            flag = true;
         }
         if (!result.first) {
             foundKey = "";
+            printKey = "";
+            if (!result.second) {
+                iter = back++;
+            }
+            flag = true;
         } else {
-            printKey += *iter;
-            printKey += " ";
+            iter++;
+            if (flag) {
+                back = iter;
+                flag = false;
+            }
+            if (iter != end) {
+                printKey += *iter;
+                printKey += " ";
+            }
         }
-        iter++;
     }
     delete root;
     return 0;
