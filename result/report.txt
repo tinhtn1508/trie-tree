@@ -1,0 +1,22 @@
+- Data structure: Using trie tree to store the keys word. There is a hash
+table at each node, which make sure that the complexity is O(1) when searching
+the character
+
+- Complexity: O(n) with n is key's length
+
+Example:
+
+Text: 
+A x B C D A B C D E K L M N O P Elmendorf Air Force Base weaveMountain Village weave past Fort Thomas With dramatic peaks and pristine lakes, Yellowstone National Park is an outdoorenthusiast's paradise. Live Oak pools swirl Livingston hot springs; verdant forestsweave past Fort Thomas meadows; and volatile geysers Glendale streams of steaming watertoward the Elmendorf Air Force Base
+
+Keys found: 
+B C D 
+A B C D E 
+K L M N 
+Elmendorf Air Force Base 
+Fort Thomas 
+Live Oak 
+Livingston 
+Fort Thomas 
+Glendale 
+Elmendorf Air Force Base

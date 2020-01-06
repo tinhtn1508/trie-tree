@@ -41,12 +41,13 @@ int main() {
     std::cout << "\nKeys found: \n";
     while (iter != end) {
         foundKey += *iter;
+        printKey += *iter;
+        printKey += " ";
         auto result = root->isWord(foundKey);
         if (result.second) {
-            printKey += *iter;
             std::cout << printKey << std::endl;
-            printKey = "";
             foundKey = "";
+            printKey = "";
             flag = true;
         }
         if (!result.first) {
@@ -61,10 +62,6 @@ int main() {
             if (flag) {
                 back = iter;
                 flag = false;
-            }
-            if (iter != end) {
-                printKey += *iter;
-                printKey += " ";
             }
         }
     }
